@@ -24,8 +24,14 @@ Paradigmas:
 ## Alunos
 |Matrícula | Aluno |
 | -- | -- |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| 19/0113596  |  Charles Manrique Serafim Morais |
+| 19/0045485  |  Eduardo Gurgel Pereira de Carvalho |
+| 19/0125829  |  Ian da Costa Gama |
+| 19/0134623  |  Marcos Diego da Silva Gomes |
+| 19/0058587  |  Matheus Raphael Soares de Oliveira |
+| 14/0158278  |  Pedro Helias Carlos  |
+| 21/1006957  |  Sebastián Héctor Zuzunaga Rosado  |
+| 19/0117508  |  Thiago Cerqueira Borges  |
 
 ## Sobre 
 Descreva o seu projeto em linhas gerais. 
