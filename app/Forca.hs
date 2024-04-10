@@ -16,7 +16,9 @@ checkLetter word guess = guess `elem` word
 
 updateWordDisplay :: String -> String -> Char -> String
 updateWordDisplay word display guess =
-  [ if x == guess || elem x guessed then x else '_' | (x, guessed) <- zip word display]
+  [ if x == guess || x `elem` guessed then x else '_' | x <- word]
+  where
+    guessed = display ++ [guess]
 
 
 isGameOver :: String -> String -> Int -> Int -> Bool

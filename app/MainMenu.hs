@@ -6,6 +6,10 @@ import Control.Monad
 import Palavras (palavrasList)
 import Forca (runGame)
 
+-- Definindo o máximo de erros permitidos
+maxErrors :: Int
+maxErrors = 6
+
 menu :: IO()
 menu = do { putStrLn $ unlines
     [ "   _                                                    _   "
@@ -24,11 +28,11 @@ menu = do { putStrLn $ unlines
         opcao <- getLine;
         case opcao of 
             "1" -> do
-                putStrLn "Iniciando jogo...";
-                
-                randomIndex <- System.Random.randomRIO (0, length palavrasList - 1)
+                putStrLn "Iniciando jogo..."
+                randomIndex <- randomRIO (0, length palavrasList - 1)
                 let word = palavrasList !! randomIndex
-                runGame word
+                runGame word maxErrors  
+
             "2" -> do
                 putStrLn "REGRAS";
                 putStrLn "1. Tente adivinhar a palavra";
