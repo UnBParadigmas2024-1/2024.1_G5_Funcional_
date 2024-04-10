@@ -15,7 +15,7 @@ Paradigmas:
  
  (Apague esses comentários)
 
-# NomeDoProjeto
+# Jogo da Forca 
 
 **Disciplina**: FGA0210 - PARADIGMAS DE PROGRAMAÇÃO - T01 <br>
 **Nro do Grupo (de acordo com a Planilha de Divisão dos Grupos)**: XX<br>
