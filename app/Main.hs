@@ -1,4 +1,8 @@
 module Main where
 
+import MainMenu (menu)
+
 main :: IO ()
-main = putStrLn "Hello, Haskell!"
+main = do 
+    putStrLn "Hello, Haskell!"
+    menu
