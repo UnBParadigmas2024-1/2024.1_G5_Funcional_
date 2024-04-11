@@ -2,6 +2,7 @@ module Forca where
 
 import System.Random
 import Data.List (intersperse)
+import Data.Char
 
 
 chooseWord :: [String] -> IO String
@@ -47,7 +48,7 @@ runGame word maxErrors = do
         else do
           putStrLn "Chute uma letra:"
           guess <- getLine
-          case guess of
+          case (map toUpper guess) of
             [c] -> if checkLetter word c
                       then do
                         let newDisplay = updateWordDisplay word display c
