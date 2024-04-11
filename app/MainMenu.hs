@@ -3,7 +3,7 @@ module MainMenu (menu) where
 import System.IO
 import System.Random
 import Control.Monad
-import Palavras (palavrasList, getWords)
+import Palavras (palavrasList)
 import Forca (runGame)
 
 -- Definindo o máximo de erros permitidos
@@ -29,9 +29,8 @@ menu = do { putStrLn $ unlines
         case opcao of 
             "1" -> do
                 putStrLn "Iniciando jogo..."
-                wordList <- getWords
-                randomIndex <- randomRIO (0, length wordList - 1)
-                let word = wordList !! randomIndex
+                randomIndex <- randomRIO (0, length palavrasList - 1)
+                let word = palavrasList !! randomIndex
                 runGame word maxErrors  
 
             "2" -> do
