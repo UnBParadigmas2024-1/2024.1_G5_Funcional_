@@ -13,11 +13,24 @@ removeElemento x xs = letrasRestantes
     where
         letrasRestantes = filter (/= x) xs
 
+whileLoop :: Int -> IO ()
+whileLoop a =
+    if (a > 0)
+    then do
+        putStrLn $ "vidas totais: " ++ show a
+        whileLoop (a-1)
+    else do 
+        putStrLn $ "perdeu"
+        return ()
 
 
 main = do --main de teste
 
     let lista = ['a'..'z']
+    let totalVida = 5
+
+    whileLoop (totalVida :: Int) --é chamado assim por ser uma funça~oque imprime na tela, logo função IO. Mas pode ser chamada apenas whileLoop 4
+
     putStrLn $ "Digite uma letra"
 
     elementoAMenos <- getChar --vai fazer o usuario digitar um elemento 
