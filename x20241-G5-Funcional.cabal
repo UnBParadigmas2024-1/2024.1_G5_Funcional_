@@ -35,7 +35,8 @@ license:            MIT
 license-file:       LICENSE
 
 -- The package author(s).
-author:             pedrohelias
+author:             pedrohelias,
+                    marcosdsg
 
 -- An email address to which users can send suggestions, bug reports, and patches.
 maintainer:         pedrohelias95@hotmail.com
@@ -50,6 +51,8 @@ extra-doc-files:    CHANGELOG.md
 -- Extra source files to be distributed with the package, such as examples, or a tutorial module.
 -- extra-source-files:
 
+data-dir: data
+
 common warnings
     ghc-options: -Wall
 
@@ -61,13 +64,17 @@ executable x20241-G5-Funcional
     main-is:          Main.hs
 
     -- Modules included in this executable, other than Main.
-    -- other-modules:
+    other-modules:  Paths_x20241_G5_Funcional,
+                    Palavras,
+                    MainMenu,
+                    Forca
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
-    build-depends:    base ^>=4.17.2.1, random
+    build-depends:    base ^>=4.17.2.1,
+                      random
 
     -- Directories containing source files.
     hs-source-dirs:   app
