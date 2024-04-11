@@ -1,8 +1,4 @@
-countCaract :: String -> IO () --conta o tamanho da palavra
-countCaract [] = putStrLn "Tamanho 0!"
-countCaract str = do
-    let tam = length str
-    putStrLn $ "Tamanho: " ++ show tam
+import Data.Array
 
 
 
@@ -29,7 +25,7 @@ temLetra (h:t) char tam = do
             temLetra t char (futuro+1)
 
 
-percorrerString :: String -> Char -> IO ()
+percorrerString :: String -> Char -> IO () -- percorre a palavra e entrega os campos escolhidos, ex: o _ o _  _  _  _ o _  _  _  _  _  _ o _ o _  _  _  _  _  
 percorrerString str char = percorrerStringAux str char 0
     where
         percorrerStringAux :: String -> Char -> Int -> IO ()
@@ -44,6 +40,45 @@ percorrerString str char = percorrerStringAux str char 0
                     --putStrLn $ "Caractere atual: " ++ [c] ++ ", Índice: " ++ show indice
                     putStr $  " _ "
                     percorrerStringAux cs char (indice + 1)
+
+-- IDEIA = Pegar essa função acima e alterar para pegar o indice e substituir num caracter, assim gerando a nova String de entrada.
+
+percorreAdd :: String -> IO ()
+percorreAdd palavra = do
+    let palavraComUnderscores = replicate (length palavra) '_'
+    putStrLn $ "Palavra: " ++ palavraComUnderscores
+    loop palavra palavraComUnderscores
+
+loop :: String -> String -> IO ()
+loop palavra palavraComUnderscores = do
+    putStrLn "Digite uma letra:"
+    letra <- getChar
+    _ <- getLine -- Consumir a nova linha após a letra
+    let novaPalavraComUnderscores = atualizarPalavra palavra palavraComUnderscores letra
+    if novaPalavraComUnderscores /= palavraComUnderscores
+        then do
+            putStrLn $ "Palavra: " ++ novaPalavraComUnderscores
+            if '_' `elem` novaPalavraComUnderscores
+                then loop palavra novaPalavraComUnderscores
+                else putStrLn "Palavra adivinhada"
+        else do
+            putStrLn "Letra errada. Tente novamente:"
+            loop palavra palavraComUnderscores
+
+atualizarPalavra :: String -> String -> Char -> String
+atualizarPalavra [] _ _ = []
+atualizarPalavra (c:cs) (u:us) letra
+    | c == letra = c : atualizarPalavra cs us letra
+    | otherwise = u : atualizarPalavra cs us letra
+
+
+
+
+-- criarString :: Int -> String
+-- criarString n = replicate n '0'
+
+
+
 
 
 
