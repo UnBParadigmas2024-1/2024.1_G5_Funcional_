@@ -2,6 +2,7 @@ module MainMenu (menu) where
 
 import System.IO
 import Control.Monad
+import ErrorM(no_errors)
 
 menu :: IO()
 menu = do { putStrLn $ unlines
@@ -17,10 +18,12 @@ menu = do { putStrLn $ unlines
     ];
         putStrLn "1 - Começar jogo";
         putStrLn "2 - Regras";
-        putStrLn "3 - Sair";
+        putStrLn "3 - Teste de componentes";
+        putStrLn "4 - Sair";
         opcao <- getLine;
         case opcao of 
-            "1" -> putStrLn "Iniciando jogo...";
+            "1" -> do
+                putStrLn "Iniciando jogo...";
             "2" -> do
                 putStrLn "REGRAS";
                 putStrLn "1. Tente adivinhar a palavra";
@@ -31,5 +34,13 @@ menu = do { putStrLn $ unlines
                 putStrLn "6. Ou quando a quantidade máxima de tentativas é atingida";
                 putStrLn "7. Isso significa que seu boneco foi enforcado!!! MORREU!!! GAME OVER!!!";
                 menu
-            "3" -> putStrLn "O jogo serah finalizado...";
+            "3" -> do
+                no_errors 0
+                no_errors 1
+                no_errors 2
+                no_errors 3
+                no_errors 4
+                no_errors 5
+                no_errors 6
+            "4" -> putStrLn "O jogo serah finalizado...";
 }
