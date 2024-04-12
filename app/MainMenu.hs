@@ -3,12 +3,15 @@ module MainMenu (menu) where
 --import System.IO
 import System.Random
 --import Control.Monad
-import Palavras (getWords)
+import Palavras (easyMode, mediumMode, hardMode)
 import Forca (runGame)
 
 -- Definindo o máximo de erros permitidos
 maxErrors :: Int
 maxErrors = 6
+
+maxErrorsHard :: Int
+maxErrorsHard = 3
 
 menu :: IO()
 menu = do { putStrLn $ unlines
@@ -28,12 +31,30 @@ menu = do { putStrLn $ unlines
         opcao <- getLine;
         case opcao of 
             "1" -> do
-                putStrLn "Iniciando jogo..."
-                wordList <- getWords
-                randomIndex <- randomRIO (0, length wordList - 1)
-                let word = wordList !! randomIndex
-                runGame word maxErrors  
-
+                putStrLn "Selecione nível: "
+                putStrLn "1 - Fácil";
+                putStrLn "2 - Médio";
+                putStrLn "3 - Difícil";
+                opcao <- getLine
+                case opcao of
+                    "1" -> do
+                        putStrLn "Iniciando jogo no nível fácil..."
+                        wordList <- easyMode
+                        randomIndex <- randomRIO (0, length wordList - 1)
+                        let word = wordList !! randomIndex
+                        runGame word maxErrors 
+                    "2" -> do
+                        putStrLn "Iniciando jogo no nível médio..."
+                        wordList <- mediumMode
+                        randomIndex <- randomRIO (0, length wordList - 1)
+                        let word = wordList !! randomIndex
+                        runGame word maxErrors 
+                    "3" -> do
+                        putStrLn "Iniciando jogo no nível difícil..."
+                        wordList <- hardMode
+                        randomIndex <- randomRIO (0, length wordList - 1)
+                        let word = wordList !! randomIndex
+                        runGame word maxErrorsHard 
             "2" -> do
                 putStrLn "REGRAS";
                 putStrLn "1. Tente adivinhar a palavra";
