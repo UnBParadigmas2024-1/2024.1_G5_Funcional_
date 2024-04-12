@@ -3,6 +3,7 @@ module MainMenu (menu) where
 import System.IO
 import Control.Monad
 import ErrorM(no_errors)
+import Lose(lose)
 
 menu :: IO()
 menu = do { putStrLn $ unlines
@@ -42,5 +43,6 @@ menu = do { putStrLn $ unlines
                 no_errors 4
                 no_errors 5
                 no_errors 6
+                lose "banana" "abdefg" 2 10
             "4" -> putStrLn "O jogo serah finalizado...";
 }
