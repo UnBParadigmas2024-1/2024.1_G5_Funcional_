@@ -1,0 +1,75 @@
+data WordInfo = WordInfo
+    { wordId :: Int
+    , word :: String
+    , hint :: String
+    }
+
+fruitHint :: String
+fruitHint = "É uma Fruta!"
+
+countryHint :: String
+countryHint = "É um Pais!"
+
+animalsHint :: String
+animalsHint = "É um Animal!"
+
+fruits :: [WordInfo]
+fruits =
+    [ (1, "UVA", "A palavra é uma fruta")
+    , (2, "FIGO", "A palavra é uma fruta")
+    , (3, "MAMAO", "A palavra é uma fruta")
+    , (4, "AMORA", "A palavra é uma fruta")
+    , (5, "CAJU", "A palavra é uma fruta")
+    , (6, "LARANJA", "A palavra é uma fruta")
+    , (7, "CUPUACU", "A palavra é uma fruta")
+    , (8, "MORANGO", "A palavra é uma fruta")
+    , (9, "CEREJA", "A palavra é uma fruta")
+    , (10, "ABACAXI", "A palavra é uma fruta")
+    , (11, "MARMELO", "A palavra é uma fruta")
+    , (12, "JACA", "A palavra é uma fruta")
+    , (13, "BANANA", "A palavra é uma fruta")
+    , (14, "FRAMBOESA", "A palavra é uma fruta")
+    , (15, "PITANGA", "A palavra é uma fruta")
+    ]
+
+animals :: [WordInfo]
+animals =
+    [ (1, "GATO", "")
+    , (2, "CACHORRO", "")
+    , (3, "VACA", "")
+    , (4, "ABELHA", "")
+    , (5, "ALPACA", "")
+    , (6, "BALEIA", "")
+    , (7, "BORBOLETA", "")
+    , (8, "CANGURU", "")
+    , (9, "CISNE", "")
+    , (10, "ELEFANTE", "")
+    , (11, "FLAMINGO", "")
+    , (12, "GIRAFA", "")
+    , (13, "JAVALI", "")
+    , (14, "MACACO", "")
+    , (15, "GALINHA", "")
+    ]
+
+countries :: [WordInfo]
+countries =
+    [ (1, "BRASIL", "")
+    , (2, "CHILE", "")
+    , (3, "ARGENTINA", "")
+    , (4, "CHINA", "")
+    , (5, "CANADA", "")
+    , (6, "JAPAO", "")
+    , (7, "MEXICO", "")
+    ]
+
+-- Função para selecionar uma palavra aleatória da lista
+randomWord :: [(Int, String, String)] -> IO (Int, String, String)
+randomWord list = do
+    randomIndex <- randomRIO (0, length list - 1)
+    return (list !! randomIndex)
+
+main :: IO ()
+main = do
+    putStrLn "Selecionando uma palavra aleatória da lista de frutas:"
+    (id, word, hint) <- randomWord fruits
+    putStrLn $ "ID: " ++ show id ++ ", Palavra: " ++ word ++ ", Dica: " ++ hint
