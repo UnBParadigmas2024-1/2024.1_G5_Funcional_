@@ -1,5 +1,7 @@
-import Data.Array
 
+module Modulos.Logico where 
+
+import Data.Array
 
 
 forLoop :: Int -> IO ()
@@ -45,25 +47,35 @@ percorrerString str char = percorrerStringAux str char 0
 
 percorreAdd :: String -> IO ()
 percorreAdd palavra = do
-    let palavraComUnderscores = replicate (length palavra) '_'
+    let palavraComUnderscores = replicate (length palavra) '*'
+    let tentativa = 5
     putStrLn $ "Palavra: " ++ palavraComUnderscores
-    loop palavra palavraComUnderscores
+    loop palavra palavraComUnderscores tentativa
 
-loop :: String -> String -> IO ()
-loop palavra palavraComUnderscores = do
-    putStrLn "Digite uma letra:"
-    letra <- getChar
-    _ <- getLine -- Consumir a nova linha após a letra
-    let novaPalavraComUnderscores = atualizarPalavra palavra palavraComUnderscores letra
-    if novaPalavraComUnderscores /= palavraComUnderscores
-        then do
-            putStrLn $ "Palavra: " ++ novaPalavraComUnderscores
-            if '_' `elem` novaPalavraComUnderscores
-                then loop palavra novaPalavraComUnderscores
-                else putStrLn "Palavra adivinhada"
-        else do
-            putStrLn "Letra errada. Tente novamente:"
-            loop palavra palavraComUnderscores
+loop :: String -> String -> Int -> IO ()
+loop palavra palavraComUnderscores tentativas
+    | tentativas <= 0 = putStrLn "Vocẽ perdeu"
+    | otherwise = do
+        putStrLn "Digite uma letra:"
+        letra <- getChar
+        _ <- getLine -- Consumir a nova linha após a letra
+        let novaPalavraComUnderscores = atualizarPalavra palavra palavraComUnderscores letra
+        if novaPalavraComUnderscores /= palavraComUnderscores
+            then do
+                putStrLn $ "Palavra: " ++ novaPalavraComUnderscores
+                if '*' `elem` novaPalavraComUnderscores
+                    then loop palavra novaPalavraComUnderscores tentativas
+                    else putStrLn "Palavra adivinhada"
+            else do
+                if tentativas > 1
+                    then do 
+                        putStrLn $ "Letra errada. Você tem mais " ++ show (tentativas-1) ++ " tentativas. Tente novamente:"
+                        loop palavra palavraComUnderscores (tentativas - 1)
+                    else do 
+                        loop palavra palavraComUnderscores (tentativas - 1)
+              
+
+ 
 
 atualizarPalavra :: String -> String -> Char -> String
 atualizarPalavra [] _ _ = []
@@ -130,11 +142,12 @@ whileLoop a lista =    -- validaEntUser elementoAMenos para chamar o validador
 
 
 
-
-main = do --main de teste
+jogo :: IO ()
+jogo = do --main de teste
 
     let totalVida = 5
     let lista = ['a'..'z']
     let palavra = "teste"
 
-    whileLoop (totalVida :: Int) lista --é chamado assim por ser uma funça~oque imprime na tela, logo função IO. Mas pode ser chamada apenas whileLoop 4
+    -- whileLoop (totalVida :: Int) lista --é chamado assim por ser uma funça~oque imprime na tela, logo função IO. Mas pode ser chamada apenas whileLoop 4
+    percorreAdd palavra 
