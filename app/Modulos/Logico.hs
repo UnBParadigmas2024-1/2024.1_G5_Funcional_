@@ -45,18 +45,18 @@ percorrerString str char = percorrerStringAux str char 0
 
 -- IDEIA = Pegar essa função acima e alterar para pegar o indice e substituir num caracter, assim gerando a nova String de entrada.
 
-percorreAdd :: String -> IO ()
-percorreAdd palavra = do
+percorreAdd :: String -> String -> IO ()
+percorreAdd palavra dica = do
     let palavraComUnderscores = replicate (length palavra) '*'
     let tentativa = 5
     putStrLn $ "Palavra: " ++ palavraComUnderscores
-    loop palavra palavraComUnderscores tentativa
+    loop palavra palavraComUnderscores dica tentativa
 
-loop :: String -> String -> Int -> IO ()
-loop palavra palavraComUnderscores tentativas
+loop :: String -> String -> String -> Int -> IO ()
+loop palavra palavraComUnderscores dica tentativas
     | tentativas <= 0 = putStrLn "Vocẽ perdeu"
     | otherwise = do
-        putStrLn "Digite uma letra:"
+        putStrLn $ "A dica eh: " ++ show dica ++ ". Digite uma letra:"
         letra <- getChar
         _ <- getLine -- Consumir a nova linha após a letra
         let novaPalavraComUnderscores = atualizarPalavra palavra palavraComUnderscores letra
@@ -64,15 +64,15 @@ loop palavra palavraComUnderscores tentativas
             then do
                 putStrLn $ "Palavra: " ++ novaPalavraComUnderscores
                 if '*' `elem` novaPalavraComUnderscores
-                    then loop palavra novaPalavraComUnderscores tentativas
+                    then loop palavra novaPalavraComUnderscores dica tentativas
                     else putStrLn "Palavra adivinhada"
             else do
                 if tentativas > 1
                     then do 
                         putStrLn $ "Letra errada. Você tem mais " ++ show (tentativas-1) ++ " tentativas. Tente novamente:"
-                        loop palavra palavraComUnderscores (tentativas - 1)
+                        loop palavra palavraComUnderscores dica (tentativas - 1)
                     else do 
-                        loop palavra palavraComUnderscores (tentativas - 1)
+                        loop palavra palavraComUnderscores dica (tentativas - 1)
               
 
  
@@ -148,6 +148,7 @@ jogo = do --main de teste
     let totalVida = 5
     let lista = ['a'..'z']
     let palavra = "teste"
+    let dica = "estamos testando esse recurso"
 
     -- whileLoop (totalVida :: Int) lista --é chamado assim por ser uma funça~oque imprime na tela, logo função IO. Mas pode ser chamada apenas whileLoop 4
-    percorreAdd palavra 
+    percorreAdd palavra dica
