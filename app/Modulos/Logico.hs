@@ -49,31 +49,55 @@ percorreAdd :: String -> String -> IO ()
 percorreAdd palavra dica = do
     let palavraComUnderscores = replicate (length palavra) '*'
     let tentativa = 5
+    let alfabeto = filter (\x -> x /= 'k' && x /= 'w' && x /= 'y' && x /= 'z') ['a'..'z']  -- limita a possibilidade de caracteres disponiveis
     putStrLn $ "Palavra: " ++ palavraComUnderscores
-    loop palavra palavraComUnderscores dica tentativa
+    loop palavra palavraComUnderscores dica tentativa alfabeto
 
-loop :: String -> String -> String -> Int -> IO ()
-loop palavra palavraComUnderscores dica tentativas
+loop :: String -> String -> String -> Int -> [Char] -> IO ()
+loop palavra palavraComUnderscores dica tentativas alfabeto
     | tentativas <= 0 = putStrLn "Vocẽ perdeu"
     | otherwise = do
-        putStrLn $ "A dica eh: " ++ show dica ++ ". Digite uma letra:"
+
+        --let alfabeto = filter (\x -> x /= 'k' && x /= 'w' && x /= 'y' && x /= 'z') ['a'..'z']  -- limita a possibilidade de caracteres disponiveis
+
+        putStrLn $ "Você pode escolher os seguintes caracteres: " ++ show alfabeto ++". A dica eh: " ++ show dica ++ ". Digite uma letra:"
+        
         letra <- getChar
-        _ <- getLine -- Consumir a nova linha após a letra
+
+        let validador = validaEntUser letra 
         let novaPalavraComUnderscores = atualizarPalavra palavra palavraComUnderscores letra
-        if novaPalavraComUnderscores /= palavraComUnderscores
+
+        _ <- getLine -- Consumir a nova linha após a letra digitada
+
+        if(validador == True) --vai validar se a letra digitada pelo usuario é valida ou não na coleção de letras possíveis
             then do
-                putStrLn $ "Palavra: " ++ novaPalavraComUnderscores
-                if '*' `elem` novaPalavraComUnderscores
-                    then loop palavra novaPalavraComUnderscores dica tentativas
-                    else putStrLn "Palavra adivinhada"
-            else do
-                if tentativas > 1
-                    then do 
-                        putStrLn $ "Letra errada. Você tem mais " ++ show (tentativas-1) ++ " tentativas. Tente novamente:"
-                        loop palavra palavraComUnderscores dica (tentativas - 1)
-                    else do 
-                        loop palavra palavraComUnderscores dica (tentativas - 1)
+                let alfabetoAlterado = removeElemento letra alfabeto
+        
+                if novaPalavraComUnderscores /= palavraComUnderscores
+                    then do
+                        putStrLn $ "Palavra: " ++ novaPalavraComUnderscores
+                        if '*' `elem` novaPalavraComUnderscores
+                            then loop palavra novaPalavraComUnderscores dica tentativas alfabetoAlterado
+                            else putStrLn "Palavra adivinhada"
+                    else do
+                        if tentativas > 1
+                            then do 
+                                putStrLn $ "Letra errada. Você tem mais " ++ show (tentativas-1) ++ " tentativas. Tente novamente!"
+                                putStrLn $ " "
+                                putStrLn $ "Palavra: " ++ novaPalavraComUnderscores
+                                loop palavra palavraComUnderscores dica (tentativas - 1) alfabetoAlterado
+                            else do 
+                                loop palavra palavraComUnderscores dica (tentativas - 1) alfabetoAlterado
               
+                        
+            else do 
+                putStrLn $ "Letra não permitida, tente novamente!"
+                putStrLn $ " "
+                putStrLn $ "Palavra: " ++ novaPalavraComUnderscores
+                loop palavra palavraComUnderscores dica tentativas alfabeto
+
+
+        
 
  
 
@@ -96,7 +120,7 @@ atualizarPalavra (c:cs) (u:us) letra
 
 validaEntUser :: Char -> Bool --funcao para validar a entrada do usuario
 validaEntUser a 
-    | a == 'ç' || a == 'k' || a == 'w' || a == 'y' = False
+    | a == 'z' || a == 'k' || a == 'w' || a == 'y' = False
     | otherwise = True
 
 
@@ -109,36 +133,35 @@ removeElemento x xs = letrasRestantes
         letrasRestantes = filter (/= x) xs
 
 
-whileLoop :: Int -> [Char] -> IO ()
-whileLoop a lista =    -- validaEntUser elementoAMenos para chamar o validador 
+-- whileLoop :: Int -> [Char] -> IO ()
+-- whileLoop a lista =    -- validaEntUser elementoAMenos para chamar o validador 
 
-    if (a > 0)
-    then do
+--     if (a > 0)
+--     then do
         
-        putStrLn $ "vidas totais: " ++ show a
-        putStrLn $ "Digite uma letra"
+--         putStrLn $ "vidas totais: " ++ show a
+--         putStrLn $ "Digite uma letra"
 
-        
+    
 
+--         elementoAMenos <- getChar --vai fazer o usuario digitar um elemento 
+--         putStrLn $ " "
 
-        elementoAMenos <- getChar --vai fazer o usuario digitar um elemento 
-        putStrLn $ " "
-
-        let validador = validaEntUser elementoAMenos --valida entrada do usuario
-        if(validador == True)
-            then do
-                let listaSem = removeElemento elementoAMenos lista
-                putStrLn $ "Lista original: " ++ show lista
-                putStrLn $ "Você escolheu a letra " ++ show elementoAMenos ++". Você ainda tem esses elementos: " ++ show listaSem
-                whileLoop (a-1) listaSem --recursão para voltar com a lista do alfabeto
+--         let validador = validaEntUser elementoAMenos --valida entrada do usuario
+--         if(validador == True)
+--             then do
+--                 let listaSem = removeElemento elementoAMenos lista
+--                 putStrLn $ "Lista original: " ++ show lista
+--                 putStrLn $ "Você escolheu a letra " ++ show elementoAMenos ++". Você ainda tem esses elementos: " ++ show listaSem
+--                 whileLoop (a-1) listaSem --recursão para voltar com a lista do alfabeto
                         
-            else do 
-                putStrLn $ "Letra não permitida, tente novamente!"
-                whileLoop a lista 
+--             else do 
+--                 putStrLn $ "Letra não permitida, tente novamente!"
+--                 whileLoop a lista 
 
-    else do 
-        putStrLn $ "perdeu"
-        return ()
+--     else do 
+--         putStrLn $ "perdeu"
+--         return ()
 
 
 
