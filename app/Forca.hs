@@ -1,7 +1,7 @@
 module Forca where
 
 import System.Random
-import Data.List (intersperse)
+import Data.List (intersperse, (\\), group, sort, minimumBy)
 import Data.Char
 
 
@@ -33,6 +33,16 @@ displayGame word display errors maxErrors = do
   putStrLn $ "Erros: " ++ show errors ++ "/" ++ show maxErrors
 
 
+nonGuessedLetters :: String -> String -> String
+nonGuessedLetters word incompleteWord = word \\ incompleteWord
+
+countChars :: String -> [(Char, Int)]
+countChars = map (\xs -> (head xs, length xs)) . group . sort
+
+tipLetter :: String -> Char
+tipLetter tipStr = fst (minimumBy (\(_, count1) (_, count2) -> compare count1 count2) (countChars tipStr))
+
+
 runGame :: String -> Int -> IO ()
 runGame word maxErrors = do
   let wordLength = length word
@@ -46,12 +56,19 @@ runGame word maxErrors = do
                then putStrLn "Você ganhou!"
                else putStrLn $ "Você perdeu! A palavra era: " ++ word
         else do
-          putStrLn "Chute uma letra:"
+          putStrLn "Chute uma letra (ou envie ? para mostrar uma letra):"
           guess <- getLine
           case (map toUpper guess) of
             [c] -> if checkLetter word c
                       then do
                         let newDisplay = updateWordDisplay word display c
                         loop word newDisplay errors
-                      else loop word display (errors + 1)
+                    else if c == '?'
+                      then do
+                        let auxWord = nonGuessedLetters word display
+                        let tipChar = tipLetter auxWord
+                        let newDisplay = updateWordDisplay word display tipChar
+                        loop word newDisplay errors
+
+                    else loop word display (errors + 1)
             _   -> putStrLn "Por favor, insira apenas uma letra." >> loop word display errors
