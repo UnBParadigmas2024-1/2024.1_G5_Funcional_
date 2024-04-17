@@ -3,6 +3,48 @@ module Modulos.Logico where
 
 import Data.Array
 
+import System.IO
+
+import Data.Maybe (mapMaybe)
+
+import System.Random
+
+
+-----------------------------------------------------parte do aleatorio--------------------------------------
+
+-- Função para gerar um número aleatório entre 1 e n
+randomNumber :: Int -> IO Int
+randomNumber n = randomRIO (1, n)
+
+
+-- Tipo de dado para representar uma linha do arquivo
+data Entry = Entry { name :: String, hint :: String } deriving Show
+
+-- Função para converter uma linha do arquivo em um Entry
+parseEntry :: String -> Maybe Entry
+parseEntry line = case words line of
+    [name, hint] -> Just (Entry name hint)
+    _ -> Nothing
+
+-- Função para ler o arquivo e retornar uma lista de Entries
+parseEntries :: FilePath -> IO [Entry]
+parseEntries filePath = do
+    contents <- readFile filePath
+    let entries = mapMaybe parseEntry (lines contents)
+    return entries
+
+-- Função para obter os dados de uma entrada em uma linha específica
+getEntryAtLine :: FilePath -> Int -> IO (Maybe Entry)
+getEntryAtLine filePath lineNumber = do
+    entries <- parseEntries filePath
+    if lineNumber >= 1 && lineNumber <= length entries
+        then return (Just (entries !! (lineNumber - 1)))
+        else return Nothing
+
+
+
+--------------------------------------------------------jogo-------------------------------------
+
 
 forLoop :: Int -> IO ()
 forLoop 0 = putStrLn $ "0 iteracoes"
@@ -55,7 +97,7 @@ percorreAdd palavra dica = do
 
 loop :: String -> String -> String -> Int -> [Char] -> IO ()
 loop palavra palavraComUnderscores dica tentativas alfabeto
-    | tentativas <= 0 = putStrLn "Vocẽ perdeu"
+    | tentativas <= 0 = putStrLn $ "Vocẽ perdeu, a palavra eh: " ++ show palavra
     | otherwise = do
 
         --let alfabeto = filter (\x -> x /= 'k' && x /= 'w' && x /= 'y' && x /= 'z') ['a'..'z']  -- limita a possibilidade de caracteres disponiveis
@@ -168,10 +210,14 @@ removeElemento x xs = letrasRestantes
 jogo :: IO ()
 jogo = do --main de teste
 
-    let totalVida = 5
-    let lista = ['a'..'z']
-    let palavra = "teste"
-    let dica = "estamos testando esse recurso"
 
-    -- whileLoop (totalVida :: Int) lista --é chamado assim por ser uma funça~oque imprime na tela, logo função IO. Mas pode ser chamada apenas whileLoop 4
-    percorreAdd palavra dica
+    let n = 4
+    lineNumber <- randomNumber n  -- Gera um número aleatório entre 1 e n
+    result <- getEntryAtLine "app/Modulos/yourfile.txt" lineNumber
+    case result of
+        Just entry -> do
+            let palavra = name entry
+                dica = hint entry
+            putStrLn $ "Palavra: " ++ palavra ++ ", Dica: " ++ dica ++ "; Como o número sorteado: " ++ show lineNumber
+            percorreAdd palavra dica  -- Chamada para a função percorreAdd dentro do bloco case
+        Nothing -> putStrLn "Linha especificada não encontrada."
