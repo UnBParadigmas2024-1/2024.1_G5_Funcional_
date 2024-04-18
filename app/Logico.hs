@@ -72,10 +72,15 @@ loop palavra palavraComUnderscores dica tentativas alfabeto
 
         --let alfabeto = filter (\x -> x /= 'k' && x /= 'w' && x /= 'y' && x /= 'z') ['a'..'z']  -- limita a possibilidade de caracteres disponiveis
 
-        putStrLn $ "Você pode escolher os seguintes caracteres: " ++ show alfabeto ++". A dica eh: é um(a) " ++ show dica ++ ". Digite uma letra:"
-        
-        letra <- getChar
+        putStrLn $ "Você pode escolher os seguintes caracteres: " ++ show alfabeto ++". Dica: é um(a) " ++ show dica ++ ". Digite uma letra:"
+        putStrLn $ "Ou digite ? para revelar uma letra " -- ++ show ajudas ++ "/3 restantes."
 
+        c <- getChar
+        -- letra
+        let letra = getLetter c palavra palavraComUnderscores
+        -- putStrLn $ "Letra:::: " ++ show letra
+
+        
         let validador = validaEntUser letra 
         let novaPalavraComUnderscores = atualizarPalavra palavra palavraComUnderscores letra
 
@@ -145,6 +150,21 @@ armazenaLetra :: [Char] -> [Char]
 armazenaLetra y = restante 
     where
         restante = filter (\x -> x /= 'k' && x /= 'w' && x /= 'y' && x /= 'z') ['a'..'z'] \\ y
+
+
+nonGuessedLetters :: String -> String -> String
+nonGuessedLetters word incompleteWord = word \\ incompleteWord
+
+countChars :: String -> [(Char, Int)]
+countChars = map (\x -> (head x, length x)) . group . sort
+
+helpLetter :: String -> Char
+helpLetter word = fst (minimumBy (\(_, count1) (_, count2) -> compare count1 count2) (countChars word))
+
+
+getLetter :: Char -> String -> String -> Char
+getLetter c word incompleteWord | c == '?' = helpLetter (nonGuessedLetters word incompleteWord)
+                                | otherwise = c
 
 
 jogo :: IO ()
