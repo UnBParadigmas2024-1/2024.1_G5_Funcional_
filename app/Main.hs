@@ -8,5 +8,5 @@ main :: IO ()
 main = do 
     -- putStrLn "Hello, Haskell!"
     -- menu
-    Logico.jogo 
+    Logico.menu 
     --Teste.main 

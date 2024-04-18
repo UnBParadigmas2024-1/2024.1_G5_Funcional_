@@ -9,6 +9,92 @@ import Data.Maybe (mapMaybe)
 
 import System.Random
 
+import Data.List 
+
+
+menu :: IO()
+menu = do { putStrLn $ unlines
+    [ "   _                                                    _   "
+    , " /x x\\                                                /x x\\ "
+    , " \\ ^ /    ███████╗░█████╗░██████╗░░█████╗░░█████╗░    \\ ^ / "
+    , "  _|_     ██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔══██╗     _|_  "
+    , " / | \\    █████╗░░██║░░██║██████╔╝██║░░╚═╝███████║    / | \\ "
+    , "/  |  \\   ██╔══╝░░██║░░██║██╔══██╗██║░░██╗██╔══██║   /  |  \\"
+    , "   |      ██║░░░░░╚█████╔╝██║░░██║╚█████╔╝██║░░██║      |   "
+    , "  / \\     ╚═╝░░░░░░╚════╝░╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝     / \\  "
+    , "_/   \\_                                              _/   \\_"
+    ];
+        putStrLn "1 - Começar jogo";
+        putStrLn "2 - Regras";
+        putStrLn "3 - Teste de componentes";
+        putStrLn "4 - Sair";
+        opcao <- getLine;
+        case opcao of 
+            "1" -> do
+                putStrLn "Iniciando jogo...";
+                jogo
+            "2" -> do
+                putStrLn "REGRAS";
+                putStrLn "1. Tente adivinhar a palavra";
+                putStrLn "2. Chute uma letra";
+                putStrLn "3. Se a letra existir na palavra, ela será exibida nas posições correspondentes";
+                putStrLn "4. Se a letra não existir, o total de erros aumentará e uma parte a mais do boneco será colocada na forca";
+                putStrLn "5. O jogo termina quando a palavra é adivinhada corretamente";
+                putStrLn "6. Ou quando a quantidade máxima de tentativas é atingida";
+                putStrLn "7. Isso significa que seu boneco foi enforcado!!! MORREU!!! GAME OVER!!!";
+                menu
+            "3" -> do
+                -- no_errors 0
+                -- no_errors 1
+                -- no_errors 2
+                -- no_errors 3
+                -- no_errors 4
+                -- no_errors 5
+                -- no_errors 6
+                -- lose "banana" "abdefg" 2 10
+                -- win "banana" "abdefg" 2 10
+                putStrLn "parou aqui!!!"
+                menu
+            "4" -> putStrLn "O jogo serah finalizado...";
+
+
+}
+
+lose :: String -> String -> IO ()
+lose word letras = do
+    putStrLn $ unlines
+        [ "░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░"
+        , "██╔════╝░██╔══██╗████╗░████║██╔════╝  ██╔══██╗██║░░░██║██╔════╝██╔══██╗"
+        , "██║░░██╗░███████║██╔████╔██║█████╗░░  ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝"
+        , "██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗"
+        , "╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║"
+        , "░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝"
+        ];
+    putStrLn $ "a palavra eh " ++ show word;
+    --putStrLn $ "Quantidade de erros: " ++ show errors;
+    putStrLn $ "Tentou as letras: " 
+    printL letras 
+    menu
+    
+printL :: String -> IO ()
+printL letters = putStrLn $ intercalate " " (map (\c -> [c]) letters)
+
+
+win :: String -> String -> IO ()
+win word letters  = do
+   putStrLn $ unlines
+        [ "██████╗░░█████╗░██████╗░░█████╗░██████╗░███████╗███╗░░██╗░██████╗██╗██╗██╗"
+        , "██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔════╝████╗░██║██╔════╝██║██║██║"
+        , "██████╔╝███████║██████╔╝███████║██████╦╝█████╗░░██╔██╗██║╚█████╗░██║██║██║"
+        , "██╔═══╝░██╔══██║██╔══██╗██╔══██║██╔══██╗██╔══╝░░██║╚████║░╚═══██╗╚═╝╚═╝╚═╝"
+        , "██║░░░░░██║░░██║██║░░██║██║░░██║██████╦╝███████╗██║░╚███║██████╔╝██╗██╗██╗"
+        , "╚═╝░░░░░╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░╚══════╝╚═╝░░╚══╝╚═════╝░╚═╝╚═╝╚═╝"
+        ];
+    --putStrLn $ "Você descobriu a palavra em " ++ show attempts ++ " tentativas!";
+    --putStrLn $ "Quantidade de erros: " ++ show errors;
+    putStrLn "Tentou as letras:";
+    printL letters;
+    menu
 
 -----------------------------------------------------parte do aleatorio--------------------------------------
 
@@ -46,27 +132,7 @@ getEntryAtLine filePath lineNumber = do
 --------------------------------------------------------jogo-------------------------------------
 
 
-forLoop :: Int -> IO ()
-forLoop 0 = putStrLn $ "0 iteracoes"
-forLoop it = 
-    if it > 0
-        then do
-            putStrLn $ "iteracao" ++ show it 
-            forLoop (it-1)
-        else 
-            return()
 
-
-temLetra :: String -> Char -> Int -> IO () 
-temLetra [] _ _ = putStrLn $ "Não tem essa letra na palavra" 
-temLetra (h:t) char tam = do 
-    let futuro = 0
-    if h == char
-        then do 
-            putStrLn $ "Tem a letra " ++ show char ++ " na posicao" ++ show futuro 
-            temLetra t char (futuro+1)
-        else 
-            temLetra t char (futuro+1)
 
 
 percorrerString :: String -> Char -> IO () -- percorre a palavra e entrega os campos escolhidos, ex: o _ o _  _  _  _ o _  _  _  _  _  _ o _ o _  _  _  _  _  
@@ -97,7 +163,10 @@ percorreAdd palavra dica = do
 
 loop :: String -> String -> String -> Int -> [Char] -> IO ()
 loop palavra palavraComUnderscores dica tentativas alfabeto
-    | tentativas <= 0 = putStrLn $ "Vocẽ perdeu, a palavra eh: " ++ show palavra
+--    | tentativas <= 0 = putStrLn $ "Vocẽ perdeu, a palavra eh: " ++ show palavra
+    | tentativas <= 0 = do
+        let teste = armazenaLetra alfabeto
+        lose palavra teste
     | otherwise = do
 
         --let alfabeto = filter (\x -> x /= 'k' && x /= 'w' && x /= 'y' && x /= 'z') ['a'..'z']  -- limita a possibilidade de caracteres disponiveis
@@ -120,7 +189,10 @@ loop palavra palavraComUnderscores dica tentativas alfabeto
                         putStrLn $ "Palavra: " ++ novaPalavraComUnderscores
                         if '*' `elem` novaPalavraComUnderscores
                             then loop palavra novaPalavraComUnderscores dica tentativas alfabetoAlterado
-                            else putStrLn "Palavra adivinhada"
+                            --else putStrLn "Palavra adivinhada"
+                            else do
+                                let teste = armazenaLetra alfabeto
+                                win palavra teste
                     else do
                         if tentativas > 1
                             then do 
@@ -174,6 +246,11 @@ removeElemento x xs = letrasRestantes
     where
         letrasRestantes = filter (/= x) xs
 
+armazenaLetra :: [Char] -> [Char]
+armazenaLetra y = restante 
+    where
+        restante = filter (\x -> x /= 'k' && x /= 'w' && x /= 'y' && x /= 'z') ['a'..'z'] \\ y
+
 
 -- whileLoop :: Int -> [Char] -> IO ()
 -- whileLoop a lista =    -- validaEntUser elementoAMenos para chamar o validador 
@@ -221,3 +298,15 @@ jogo = do --main de teste
             putStrLn $ "Palavra: " ++ palavra ++ ", Dica: " ++ dica ++ "; Como o número sorteado: " ++ show lineNumber
             percorreAdd palavra dica  -- Chamada para a função percorreAdd dentro do bloco case
         Nothing -> putStrLn "Linha especificada não encontrada."
+
+
+-- jogo :: IO ()
+-- jogo = do --main de teste
+
+--     let totalVida = 5
+--     let lista = ['a'..'z']
+--     let palavra = "teste"
+--     let dica = "estamos testando esse recurso"
+
+--     -- whileLoop (totalVida :: Int) lista --é chamado assim por ser uma funça~oque imprime na tela, logo função IO. Mas pode ser chamada apenas whileLoop 4
+--     percorreAdd palavra dica
