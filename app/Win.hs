@@ -6,6 +6,7 @@ import Printletters(printL)
 
 win :: String -> String -> IO ()
 win word letters = do
+   putStrLn " ";
    putStrLn $ unlines
         [ "██████╗░░█████╗░██████╗░░█████╗░██████╗░███████╗███╗░░██╗░██████╗██╗██╗██╗"
         , "██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔════╝████╗░██║██╔════╝██║██║██║"
@@ -15,6 +16,7 @@ win word letters = do
         , "╚═╝░░░░░╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░╚══════╝╚═╝░░╚══╝╚═════╝░╚═╝╚═╝╚═╝"
         ];
     
+    putStrLn $ "Você ganhou!!! Acertou a palavra: " ++ show word;
     putStrLn "Tentou as letras:";
     printL letters;
     --menu

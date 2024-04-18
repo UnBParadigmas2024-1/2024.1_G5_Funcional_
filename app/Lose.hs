@@ -9,6 +9,7 @@ import Printletters(printL)
 
 lose :: String -> String -> IO ()
 lose word letters = do
+    putStrLn " "
     putStrLn $ unlines
         [ "░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░"
         , "██╔════╝░██╔══██╗████╗░████║██╔════╝  ██╔══██╗██║░░░██║██╔════╝██╔══██╗"

@@ -87,10 +87,12 @@ loop palavra palavraComUnderscores dica tentativas alfabeto
         
                 if novaPalavraComUnderscores /= palavraComUnderscores
                     then do
-                        putStrLn $ " "
-                        putStrLn $ "Palavra: " ++ novaPalavraComUnderscores ++ ". Você ainda tem " ++ show tentativas ++ " tentativas"
+                        
                         if '*' `elem` novaPalavraComUnderscores
-                            then loop palavra novaPalavraComUnderscores dica tentativas alfabetoAlterado
+                            then do 
+                                putStrLn $ " "
+                                putStrLn $ "Palavra: " ++ novaPalavraComUnderscores ++ ". Você ainda tem " ++ show tentativas ++ " tentativas"
+                                loop palavra novaPalavraComUnderscores dica tentativas alfabetoAlterado
                             --else putStrLn "Palavra adivinhada"
                             else do
                                 let teste = armazenaLetra alfabeto
