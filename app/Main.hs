@@ -4,5 +4,4 @@ import MainMenu (menu)
 
 main :: IO ()
 main = do 
-    putStrLn "Hello, Haskell!"
     menu

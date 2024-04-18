@@ -64,17 +64,25 @@ executable x20241-G5-Funcional
     main-is:          Main.hs
 
     -- Modules included in this executable, other than Main.
-    other-modules:  Paths_x20241_G5_Funcional,
-                    Palavras,
-                    MainMenu,
-                    Forca
+
+    other-modules:  Logico, Lose, MainMenu, Printletters, Win
+
+   -- other-modules:  Paths_x20241_G5_Funcional,
+   --                 Palavras,
+   --                 MainMenu,
+   --                 Forca
+
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
-    build-depends:    base ^>=4.17.2.1,
-                      random
+
+    build-depends:    base ^>=4.17.2.1, array, random
+
+    --build-depends:    base ^>=4.17.2.1,
+    --                  random
+
 
     -- Directories containing source files.
     hs-source-dirs:   app
