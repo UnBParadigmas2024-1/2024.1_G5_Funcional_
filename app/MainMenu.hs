@@ -1,11 +1,13 @@
 module MainMenu (menu) where
 
+
 import System.IO
 import Control.Monad
 --import ErrorM(no_errors)
 --import Lose(lose)
 --import Win(win)
 import qualified Logico as Logico
+
 
 
 menu :: IO()
@@ -27,9 +29,11 @@ menu = do { putStrLn $ unlines
         opcao <- getLine;
         case opcao of 
             "1" -> do
+
                 putStrLn "Iniciando jogo...";
                 Logico.jogo 
                 menu 
+
 
             "2" -> do
                 putStrLn "REGRAS";
@@ -41,6 +45,7 @@ menu = do { putStrLn $ unlines
                 putStrLn "6. Ou quando a quantidade máxima de tentativas é atingida";
                 putStrLn "7. Isso significa que seu boneco foi enforcado!!! MORREU!!! GAME OVER!!!";
                 menu
+
             "3" -> do
                 -- no_errors 0
                 -- no_errors 1
@@ -54,4 +59,5 @@ menu = do { putStrLn $ unlines
                 putStrLn "em construção!"
                 menu
             "4" -> putStrLn "O jogo serah finalizado...";
+
 }
