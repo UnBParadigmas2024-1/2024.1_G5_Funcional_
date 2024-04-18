@@ -18,7 +18,7 @@ import Win(win)
 printL :: String -> IO ()
 printL letters = putStrLn $ intercalate " " (map (\c -> [c]) letters)
 
-
+----------------------------------------------- gera n aleatorio e selecionar palavra na base-------------------------------------------------
 
 randomNumber :: Int -> IO Int --gera numero aleatorio de 1 a n. Esse n é descrito na main, especificamente em "jogo"
 randomNumber n = randomRIO (1, n)
@@ -51,23 +51,8 @@ getEntryAtLine filePath lineNumber = do
 
 
 
-percorrerString :: String -> Char -> IO () -- percorre a palavra e entrega os campos escolhidos, ex: o _ o _  _  _  _ o _  _  _  _  _  _ o _ o _  _  _  _  _  
-percorrerString str char = percorrerStringAux str char 0
-    where
-        percorrerStringAux :: String -> Char -> Int -> IO ()
-        percorrerStringAux [] _ _ = putStrLn " Fim da string."
-        percorrerStringAux (c:cs) char indice = do
-            if c == char
-                then do  
-                    --putStrLn $ "Caractere atual: " ++ [c] ++ ", Índice: " ++ show indice ++ " - Este está contido"
-                    putStr $ [char]
-                    percorrerStringAux cs char (indice + 1)
-                else do 
-                    --putStrLn $ "Caractere atual: " ++ [c] ++ ", Índice: " ++ show indice
-                    putStr $  " _ "
-                    percorrerStringAux cs char (indice + 1)
 
--- IDEIA = Pegar essa função acima e alterar para pegar o indice e substituir num caracter, assim gerando a nova String de entrada.
+
 
 percorreAdd :: String -> String -> IO ()
 percorreAdd palavra dica = do
@@ -102,7 +87,8 @@ loop palavra palavraComUnderscores dica tentativas alfabeto
         
                 if novaPalavraComUnderscores /= palavraComUnderscores
                     then do
-                        putStrLn $ "Palavra: " ++ novaPalavraComUnderscores
+                        putStrLn $ " "
+                        putStrLn $ "Palavra: " ++ novaPalavraComUnderscores ++ ". Você ainda tem " ++ show tentativas ++ " tentativas"
                         if '*' `elem` novaPalavraComUnderscores
                             then loop palavra novaPalavraComUnderscores dica tentativas alfabetoAlterado
                             --else putStrLn "Palavra adivinhada"
@@ -171,5 +157,5 @@ jogo = do
             let palavra = name entry
                 dica = hint entry
             --putStrLn $ "Palavra: " ++ palavra ++ ", Dica: " ++ dica ++ "; Como o número sorteado: " ++ show lineNumber
-            percorreAdd palavra dica  -- Chamada para a função percorreAdd dentro do bloco case
+            percorreAdd palavra dica  
         Nothing -> putStrLn "Linha especificada não encontrada."
