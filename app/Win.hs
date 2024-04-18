@@ -1,10 +1,11 @@
 module Win(win) where
 
-import MainMenu (menu)
+--import MainMenu (menu)
 import Printletters(printL)
+--import qualified Logico
 
-win :: String -> String -> Int -> Int -> IO ()
-win word letters errors attempts = do
+win :: String -> String -> IO ()
+win word letters = do
    putStrLn $ unlines
         [ "██████╗░░█████╗░██████╗░░█████╗░██████╗░███████╗███╗░░██╗░██████╗██╗██╗██╗"
         , "██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔════╝████╗░██║██╔════╝██║██║██║"
@@ -13,8 +14,7 @@ win word letters errors attempts = do
         , "██║░░░░░██║░░██║██║░░██║██║░░██║██████╦╝███████╗██║░╚███║██████╔╝██╗██╗██╗"
         , "╚═╝░░░░░╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░╚══════╝╚═╝░░╚══╝╚═════╝░╚═╝╚═╝╚═╝"
         ];
-    putStrLn $ "Você descobriu a palavra em " ++ show attempts ++ " tentativas!";
-    putStrLn $ "Quantidade de erros: " ++ show errors;
+    
     putStrLn "Tentou as letras:";
     printL letters;
-    menu
+    --menu

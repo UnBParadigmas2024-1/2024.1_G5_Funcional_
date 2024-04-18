@@ -2,9 +2,11 @@ module MainMenu (menu) where
 
 import System.IO
 import Control.Monad
-import ErrorM(no_errors)
-import Lose(lose)
-import Win(win)
+--import ErrorM(no_errors)
+--import Lose(lose)
+--import Win(win)
+import qualified Logico as Logico
+
 
 menu :: IO()
 menu = do { putStrLn $ unlines
@@ -26,6 +28,9 @@ menu = do { putStrLn $ unlines
         case opcao of 
             "1" -> do
                 putStrLn "Iniciando jogo...";
+                Logico.jogo 
+                menu 
+
             "2" -> do
                 putStrLn "REGRAS";
                 putStrLn "1. Tente adivinhar a palavra";
@@ -37,14 +42,16 @@ menu = do { putStrLn $ unlines
                 putStrLn "7. Isso significa que seu boneco foi enforcado!!! MORREU!!! GAME OVER!!!";
                 menu
             "3" -> do
-                no_errors 0
-                no_errors 1
-                no_errors 2
-                no_errors 3
-                no_errors 4
-                no_errors 5
-                no_errors 6
-                lose "banana" "abdefg" 2 10
-                win "banana" "abdefg" 2 10
+                -- no_errors 0
+                -- no_errors 1
+                -- no_errors 2
+                -- no_errors 3
+                -- no_errors 4
+                -- no_errors 5
+                -- no_errors 6
+                -- lose "banana" "abdefg" 2 10
+                -- win "banana" "abdefg" 2 10
+                putStrLn "em construção!"
+                menu
             "4" -> putStrLn "O jogo serah finalizado...";
 }

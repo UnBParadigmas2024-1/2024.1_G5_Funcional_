@@ -1,10 +1,14 @@
 module Lose(lose) where
 
-import MainMenu (menu)
+--import MainMenu (menu)
 import Printletters(printL)
+--import qualified Logico
 
-lose :: String -> String -> Int -> Int -> IO ()
-lose word letters errors attempts = do
+
+
+
+lose :: String -> String -> IO ()
+lose word letters = do
     putStrLn $ unlines
         [ "░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░"
         , "██╔════╝░██╔══██╗████╗░████║██╔════╝  ██╔══██╗██║░░░██║██╔════╝██╔══██╗"
@@ -13,9 +17,10 @@ lose word letters errors attempts = do
         , "╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║"
         , "░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝"
         ];
-    putStrLn $ "Você fez " ++ show attempts ++ " tentativas!";
-    putStrLn $ "Quantidade de erros: " ++ show errors;
+    --putStrLn $ "Você fez " ++ show attempts ++ " tentativas!";
+    --putStrLn $ "Quantidade de erros: " ++ show errors;
+    putStrLn $ "a palavra eh " ++ show word;
     putStrLn "Tentou as letras:";
     printL letters;
-    menu
+    --menu
 
