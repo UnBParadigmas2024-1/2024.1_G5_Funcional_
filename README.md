@@ -75,7 +75,7 @@ Apresente, brevemente, como cada membro do grupo contribuiu para o projeto.
 | Ian da Costa Gama  |  PREENCHER | PREENCHER |
 | Marcos Diego da Silva Gomes  |  Criação da biblioteca de palavras e elaboração do módulo de manipulação da mesma, incluindo leitura de arquivo, edição dos dados, separação por categorias e manipulação em listas. | Boa |
 | Matheus Raphael Soares de Oliveira  |  PREENCHER | PREENCHER |
-| Pedro Helias Carlos  |  PREENCHER | Excelente |
+| Pedro Helias Carlos  |  Criação da parte lógica do projeto, incluindo: verificação de caracter, escolha de letras, comparação de palavras, conversão da palavra em caractere, funcionamento base do jogo. Além de adaptação do código as regras do jogo (vitória e derrota), e integração entre menu e parte lógica. | Excelente |
 | Sebastián Héctor Zuzunaga Rosado  |  Desenvolvimento de módulos: Menu principal, fim de jogo, parabéns e erros | Boa |
 | Thiago Cerqueira Borges  |  PREENCHER | PREENCHER |
 
