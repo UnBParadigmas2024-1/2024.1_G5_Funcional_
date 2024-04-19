@@ -76,7 +76,7 @@ Apresente, brevemente, como cada membro do grupo contribuiu para o projeto.
 | Marcos Diego da Silva Gomes  |  PREENCHER | PREENCHER |
 | Matheus Raphael Soares de Oliveira  |  PREENCHER | PREENCHER |
 | Pedro Helias Carlos  |  PREENCHER | Excelente |
-| Sebastián Héctor Zuzunaga Rosado  |  PREENCHER | PREENCHER |
+| Sebastián Héctor Zuzunaga Rosado  |  Desenvolvimento de módulos: Menu principal, fim de jogo, parabéns e erros | Boa |
 | Thiago Cerqueira Borges  |  PREENCHER | PREENCHER |
 
 
