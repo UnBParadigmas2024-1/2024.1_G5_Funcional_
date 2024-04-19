@@ -2,7 +2,7 @@
 
 Paradigma:
  - Funcional
- - 
+   
 **Disciplina**: FGA0210 - PARADIGMAS DE PROGRAMAÇÃO - T01 <br>
 **Nro do Grupo (de acordo com a Planilha de Divisão dos Grupos)**: 05<br>
 **Paradigma**: Funcional<br>
@@ -20,20 +20,43 @@ Paradigma:
 | 19/0117508  |  Thiago Cerqueira Borges  |
 
 ## Sobre 
-Descreva o seu projeto em linhas gerais. 
-Use referências, links, que permitam conhecer um pouco mais sobre o projeto.
-Capriche nessa seção, pois ela é a primeira a ser lida pelos interessados no projeto.
+Haskell é uma linguagem de programação poderosa e expressiva que oferece diversas vantagens para o desenvolvimento de software. Em nosso projeto, utilizamos alguns recuros como:
+- **Leitura de arquivo** O jogo lê um arquivo de texto contendo palavras e seleciona uma delas aleatoriamente.
+- **Sistema Funcional**: O jogador deve adivinhar a palavra, letra por letra, até preencher a palavra corretamente.
+- **Sistema de Vidas**: O jogador tem um total de 6 “vidas” (ou chutes). Se errar 6 letras, perde o jogo.
+- **Sorteio de Nova Palavra**: Com 30% de chance, o sistema sorteia uma nova palavra quando faltar apenas uma letra para completar a atual.
+### Comunidade
+- Site oficial da Haskell: https://www.haskell.org/haskellwiki/Haskell
+- Documentação da linguagem Haskell: https://www.haskell.org/documentation/
+- Livro "Learn You a Haskell for Great Good": https://learnyouahaskell.github.io/
+- Repositório de reimplementações do jogo da forca em Haskell: https://github.com/haskell
+- [Hangman game](https://hackage.haskell.org/package/PlayHangmanGame)
 
 ## Screenshots
-Adicione 2 ou mais screenshots do projeto em termos de interface e/ou funcionamento.
+### Tela inicial
+![image](https://github.com/UnBParadigmas2024-1/2024.1_G5_Funcional_Jogo_da_Forca/assets/51385738/0e37a91d-4320-48ad-ac21-cc91b906c3b5)
+### Verificando Letra
+![image](https://github.com/UnBParadigmas2024-1/2024.1_G5_Funcional_Jogo_da_Forca/assets/51385738/8c73cceb-bcf3-49e6-939d-59ecdb52c894)
+### Tela de derrota
+![image](https://github.com/UnBParadigmas2024-1/2024.1_G5_Funcional_Jogo_da_Forca/assets/51385738/3dfcd479-7c07-4119-ac32-e289e8a131bd)
+### Vitória
+![image](https://github.com/UnBParadigmas2024-1/2024.1_G5_Funcional_Jogo_da_Forca/assets/51385738/b2c83bf4-0357-4ced-b55e-96fa1a2f9aaa)
+
 
 ## Instalação 
-**Linguagens**: Haskell<br>
-**Tecnologias**: xxxxxx<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
-Insira um manual ou um script para auxiliar ainda mais.
-Gifs animados e outras ilustrações são bem-vindos!
+Durante o processo nós utilizamos o Cabal para gerar a build e run na aplicação
 
+![gYEXj](https://github.com/UnBParadigmas2024-1/2024.1_G5_Funcional_Jogo_da_Forca/assets/51385738/ca879853-a8b4-4921-b8f0-0ffd6b008b4b)
+
+
+#### Para gerar a build
+``
+Cabal build 
+``
+#### Para executar
+``
+Cabal run 
+``
 ## Uso 
 Explique como usar seu projeto.
 Procure ilustrar em passos, com apoio de telas do software, seja com base na interface gráfica, seja com base no terminal.
@@ -48,20 +71,36 @@ Procure:
 (iV) Apresentar lições aprendidas, contribuições, pendências, e ideias para trabalhos futuros.
 OBS: TODOS DEVEM PARTICIPAR, CONFERINDO PONTOS DE VISTA.
 TEMPO: +/- 15min
-
 ## Participações
 Apresente, brevemente, como cada membro do grupo contribuiu para o projeto.
 |Nome do Membro | Contribuição | Significância da Contribuição para o Projeto (Excelente/Boa/Regular/Ruim/Nula) |
 | -- | -- | -- |
-| Fulano  |  Programação dos Fatos da Base de Conhecimento Lógica | Boa |
+| Eduardo Gurgel Pereira de Carvalho  |  Elaboração dos módulos básicos do jogo, como: Escolha de letra, verificação de caracter, GameOver, e loop geral da aplicação | Excelente |
+| Charles Manrique Serafim Morais  |  PREENCHER | PREENCHER |
+| Ian da Costa Gama  |  PREENCHER | PREENCHER |
+| Marcos Diego da Silva Gomes  |  PREENCHER | PREENCHER |
+| Matheus Raphael Soares de Oliveira  |  PREENCHER | PREENCHER |
+| Pedro Helias Carlos  |  PREENCHER | Excelente |
+| Sebastián Héctor Zuzunaga Rosado  |  PREENCHER | PREENCHER |
+| Thiago Cerqueira Borges  |  PREENCHER | PREENCHER |
+
 
 ## Outros 
 Quaisquer outras informações sobre o projeto podem ser descritas aqui. Não esqueça, entretanto, de informar sobre:
-(i) Lições Aprendidas;
-(ii) Percepções;
-(iii) Contribuições e Fragilidades, e
-(iV) Trabalhos Futuros.
+### Eduardo Gurgel
+- (i) Lições Aprendidas;
+Aprendi os principais conceitos de Haskell, tipagem, código modularizado
+- (ii) Percepções;
+ A implementação do jogo exigiu o gerenciamento do estado do jogo, como a palavra secreta, a exibição atual da palavra, o número de erros e o status do jogo (venceu/perdeu).
+- (iii) Contribuições e Fragilidades
+Uso de recursos mais avançados, falta de interface gráfica mais elaborada, curva de aprendizado alta para iniciantes.
+- (iV) Trabalhos Futuros.
+Aprimorar a Interface do Usuário, otimizar o desempenho, elaborar melhor os níveis de dificuldade.
 
 ## Fontes
-Referencie, adequadamente, as referências utilizadas.
-Indique ainda sobre fontes de leitura complementares.
+- Site oficial da Haskell: https://www.haskell.org/haskellwiki/Haskell
+- Documentação da linguagem Haskell: https://www.haskell.org/documentation/
+- Livro "Learn You a Haskell for Great Good": https://learnyouahaskell.github.io/
+- Repositório de reimplementações do jogo da forca em Haskell: https://github.com/haskell
+- [Hangman game](https://hackage.haskell.org/package/PlayHangmanGame)
+
