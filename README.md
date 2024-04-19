@@ -58,9 +58,9 @@ Cabal build
 Cabal run 
 ``
 ## Uso 
-Explique como usar seu projeto.
-Procure ilustrar em passos, com apoio de telas do software, seja com base na interface gráfica, seja com base no terminal.
-Nessa seção, deve-se revelar de forma clara sobre o funcionamento do software.
+Pequena ilustração básica de como utilizar o Game
+![Design sem nome](https://github.com/UnBParadigmas2024-1/2024.1_G5_Funcional_Jogo_da_Forca/assets/51385738/6c1f2022-729d-429b-a6c9-2152395bf39e)
+
 
 ## Vídeo
 Adicione 1 ou mais vídeos com a execução do projeto.
