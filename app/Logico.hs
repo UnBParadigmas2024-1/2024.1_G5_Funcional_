@@ -58,12 +58,13 @@ percorreAdd :: String -> String -> IO ()
 percorreAdd palavra dica = do
     let palavraComUnderscores = replicate (length palavra) '*'
     let tentativa = 5
+    let ajuda = 3
     let alfabeto = filter (\x -> x /= 'k' && x /= 'w' && x /= 'y' && x /= 'z') ['a'..'z']  -- limita a possibilidade de caracteres disponiveis
     putStrLn $ "Palavra: " ++ palavraComUnderscores
-    loop palavra palavraComUnderscores dica tentativa alfabeto
+    loop palavra palavraComUnderscores dica tentativa ajuda alfabeto
 
-loop :: String -> String -> String -> Int -> [Char] -> IO ()
-loop palavra palavraComUnderscores dica tentativas alfabeto
+loop :: String -> String -> String -> Int -> Int -> [Char] -> IO ()
+loop palavra palavraComUnderscores dica tentativas ajudas alfabeto
 --    | tentativas <= 0 = putStrLn $ "Vocẽ perdeu, a palavra eh: " ++ show palavra
     | tentativas <= 0 = do
         let teste = armazenaLetra alfabeto
@@ -72,10 +73,15 @@ loop palavra palavraComUnderscores dica tentativas alfabeto
 
         --let alfabeto = filter (\x -> x /= 'k' && x /= 'w' && x /= 'y' && x /= 'z') ['a'..'z']  -- limita a possibilidade de caracteres disponiveis
 
-        putStrLn $ "Você pode escolher os seguintes caracteres: " ++ show alfabeto ++". A dica eh: é um(a) " ++ show dica ++ ". Digite uma letra:"
-        
-        letra <- getChar
+        putStrLn $ "Você pode escolher os seguintes caracteres: " ++ show alfabeto ++". Dica: é um(a) " ++ show dica ++ ". Digite uma letra:"
+        putStrLn $ "Ou digite ? para revelar uma letra " ++ show ajudas ++ "/3 restantes."
 
+        c <- getChar
+        -- letra
+        let letra = getLetter c palavra palavraComUnderscores ajudas
+        -- putStrLn $ "Letra:::: " ++ show letra
+
+        
         let validador = validaEntUser letra 
         let novaPalavraComUnderscores = atualizarPalavra palavra palavraComUnderscores letra
 
@@ -84,7 +90,7 @@ loop palavra palavraComUnderscores dica tentativas alfabeto
         if(validador == True) --vai validar se a letra digitada pelo usuario é valida ou não na coleção de letras possíveis
             then do
                 let alfabetoAlterado = removeElemento letra alfabeto
-        
+                let newAjudas = if c == '?' then if ajudas > 0 then ajudas - 1 else 0 else ajudas
                 if novaPalavraComUnderscores /= palavraComUnderscores
                     then do
                         
@@ -92,27 +98,33 @@ loop palavra palavraComUnderscores dica tentativas alfabeto
                             then do 
                                 putStrLn $ " "
                                 putStrLn $ "Palavra: " ++ novaPalavraComUnderscores ++ ". Você ainda tem " ++ show tentativas ++ " tentativas"
-                                loop palavra novaPalavraComUnderscores dica tentativas alfabetoAlterado
+                                loop palavra novaPalavraComUnderscores dica tentativas newAjudas alfabetoAlterado
                             --else putStrLn "Palavra adivinhada"
                             else do
                                 let teste = armazenaLetra alfabeto
                                 win palavra teste
                     else do
-                        if tentativas > 1
+                        if tentativas > 1 && c /= '?'
                             then do 
+                                putStrLn " "
                                 putStrLn $ "Letra errada. Você tem mais " ++ show (tentativas-1) ++ " tentativas. Tente novamente!"
-                                putStrLn $ " "
                                 putStrLn $ "Palavra: " ++ novaPalavraComUnderscores
-                                loop palavra palavraComUnderscores dica (tentativas - 1) alfabetoAlterado
-                            else do 
-                                loop palavra palavraComUnderscores dica (tentativas - 1) alfabetoAlterado
+                                loop palavra palavraComUnderscores dica (tentativas - 1) newAjudas alfabetoAlterado
+                            else if c /= '?' then do
+                                loop palavra palavraComUnderscores dica (tentativas - 1) newAjudas alfabetoAlterado
+                            else do
+                                putStrLn " "
+                                putStrLn $ "Você usou todas as ajudas. Você tem mais " ++ show tentativas ++ " tentativas. Tente novamente!"
+                                putStrLn $ "Palavra: " ++ novaPalavraComUnderscores
+                                loop palavra palavraComUnderscores dica tentativas newAjudas alfabetoAlterado
+                                
               
                         
             else do 
                 putStrLn $ "Letra não permitida, tente novamente!"
                 putStrLn $ " "
                 putStrLn $ "Palavra: " ++ novaPalavraComUnderscores
-                loop palavra palavraComUnderscores dica tentativas alfabeto
+                loop palavra palavraComUnderscores dica tentativas ajudas alfabeto
 
 
         
@@ -145,6 +157,22 @@ armazenaLetra :: [Char] -> [Char]
 armazenaLetra y = restante 
     where
         restante = filter (\x -> x /= 'k' && x /= 'w' && x /= 'y' && x /= 'z') ['a'..'z'] \\ y
+
+
+nonGuessedLetters :: String -> String -> String
+nonGuessedLetters word incompleteWord = word \\ incompleteWord
+
+countChars :: String -> [(Char, Int)]
+countChars = map (\x -> (head x, length x)) . group . sort
+
+helpLetter :: String -> Char
+helpLetter word = fst (minimumBy (\(_, count1) (_, count2) -> compare count1 count2) (countChars word))
+
+
+getLetter :: Char -> String -> String -> Int -> Char
+getLetter c word incompleteWord hints   | c == '?' = if hints > 0 then helpLetter (nonGuessedLetters word incompleteWord)
+                                                     else '_'
+                                        | otherwise = c
 
 
 jogo :: IO ()
