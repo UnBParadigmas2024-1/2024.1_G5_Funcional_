@@ -73,7 +73,7 @@ Apresente, brevemente, como cada membro do grupo contribuiu para o projeto.
 | Eduardo Gurgel Pereira de Carvalho  |  Elaboração dos módulos básicos do jogo, como: Escolha de letra, verificação de caracter, GameOver, e loop geral da aplicação | Excelente |
 | Charles Manrique Serafim Morais  |  PREENCHER | PREENCHER |
 | Ian da Costa Gama  |  PREENCHER | PREENCHER |
-| Marcos Diego da Silva Gomes  |  PREENCHER | PREENCHER |
+| Marcos Diego da Silva Gomes  |  Criação da biblioteca de palavras e elaboração do módulo de manipulação da mesma, incluindo leitura de arquivo, edição dos dados, separação por categorias e manipulação em listas. | Boa |
 | Matheus Raphael Soares de Oliveira  |  PREENCHER | PREENCHER |
 | Pedro Helias Carlos  |  PREENCHER | Excelente |
 | Sebastián Héctor Zuzunaga Rosado  |  Desenvolvimento de módulos: Menu principal, fim de jogo, parabéns e erros | Boa |
@@ -81,16 +81,31 @@ Apresente, brevemente, como cada membro do grupo contribuiu para o projeto.
 
 
 ## Outros 
-Quaisquer outras informações sobre o projeto podem ser descritas aqui. Não esqueça, entretanto, de informar sobre:
-### Eduardo Gurgel
-- (i) Lições Aprendidas;
-Aprendi os principais conceitos de Haskell, tipagem, código modularizado
-- (ii) Percepções;
- A implementação do jogo exigiu o gerenciamento do estado do jogo, como a palavra secreta, a exibição atual da palavra, o número de erros e o status do jogo (venceu/perdeu).
-- (iii) Contribuições e Fragilidades
-Uso de recursos mais avançados, falta de interface gráfica mais elaborada, curva de aprendizado alta para iniciantes.
-- (iV) Trabalhos Futuros.
-Aprimorar a Interface do Usuário, otimizar o desempenho, elaborar melhor os níveis de dificuldade.
+
+### Lições Aprendidas
+- Principais conceitos de Haskell, tipagem e modularização de código
+- Criação e manipulação de arquivos
+
+### Percepções
+- O Haskell pode se tornar bem complexo a medida que se aprofunda no conhecimento da linguagem
+- A implementação do jogo exigiu o gerenciamento do estado do jogo, como a palavra secreta, a exibição atual da palavra, o número de erros e o status do jogo (venceu/perdeu)
+- Trabalhar com IO possui suas complexidades
+- Juntar branchs apenas ao final do projeto pode causar dificuldades, existência de retrabalhos e código desperdiçado, além de impedir um melhor refinamento do projeto
+
+### Contribuições
+- União do grupo em relação as ideias relacionadas ao projeto
+- Divisão de partes do projeto e auxílio em fontes de conhecimento para aprendizagem
+- Implementação do jogo e utilização de biblioteca de palavras em arquivo auxiliar
+
+### Fragilidades
+- Falta de interface gráfica mais elaborada
+- Maior biblioteca de palavras
+
+### Trabalhos Futuros
+- Aprimorar a Interface do Usuário
+- Elaborar melhor os níveis de dificuldade
+- Expansão da biblioteca de palavras
+- Implementação de funções para deixar o próprio usuário incluir e remover categorias e palavras da biblioteca
 
 ## Fontes
 - Site oficial da Haskell: https://www.haskell.org/haskellwiki/Haskell
