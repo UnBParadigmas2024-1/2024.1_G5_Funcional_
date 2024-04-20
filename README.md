@@ -65,6 +65,7 @@ Pequena ilustração básica de como utilizar o Game
 ## Vídeo
 Aqui está o nosso vídeo de Apresentação
 [Vídeo de Apresentação - Youtube](https://www.youtube.com/watch?v=8LPL6h5cWQc)
+[Vídeo de Apresentação - Visual](https://youtu.be/NNxE_Oa3U5w)
 
 ## Participações
 Apresente, brevemente, como cada membro do grupo contribuiu para o projeto.
